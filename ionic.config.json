@@ -1,8 +1,8 @@
 {
   "name": "Student",
-  "app_id": "76ee19da",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "app_id": "76ee19da"
 }
