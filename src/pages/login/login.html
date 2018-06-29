@@ -1,0 +1,46 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content>
+    <div class="blur-landing"></div>
+    <div class="presentation">
+        <img src="../../assets/imgs/logo.png"/>
+
+        <ion-card>
+            <ion-list>
+
+                <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="contact"></ion-icon>
+                    </ion-avatar>
+                    <ion-label stacked>ID Number</ion-label>
+                    <ion-input type="number" [(ngModel)]="id_number"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="unlock"></ion-icon>
+                    </ion-avatar>
+                    <ion-label stacked>Password</ion-label>
+                    <ion-input type="password" [(ngModel)]="password"></ion-input>
+                </ion-item>
+            </ion-list>
+
+        </ion-card>
+
+        <div class="bottom" padding>
+            <button ion-button large block icon-left color="secondary" (click)="login()">
+                <ion-icon name="unlock"></ion-icon>
+                Login
+            </button>
+            <br/>
+            <p>
+                <strong>Forgot Password </strong>| <strong>Create Account</strong>
+            </p>
+        </div>
+
+    </div>
+</ion-content>
