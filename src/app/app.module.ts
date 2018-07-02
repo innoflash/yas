@@ -9,13 +9,23 @@ import {HomePage} from '../pages/home/home';
 import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
 import {IonicStorageModule} from "@ionic/storage";
+import {ProfilePage} from "../pages/profile/profile";
+import {EditProfilePage} from "../pages/edit-profile/edit-profile";
+import {StoriesPage} from "../pages/stories/stories";
+import {NewStoryPage} from "../pages/new-story/new-story";
+import {EditStoryPage} from "../pages/edit-story/edit-story";
 
 @NgModule({
     declarations: [
         MyApp,
         HomePage,
         LoginPage,
-        RegisterPage
+        RegisterPage,
+        ProfilePage,
+        EditProfilePage,
+        StoriesPage,
+        NewStoryPage,
+        EditStoryPage
     ],
     imports: [
         BrowserModule,
@@ -27,7 +37,12 @@ import {IonicStorageModule} from "@ionic/storage";
         MyApp,
         HomePage,
         LoginPage,
-        RegisterPage
+        RegisterPage,
+        ProfilePage,
+        EditProfilePage,
+        StoriesPage,
+        NewStoryPage,
+        EditStoryPage
     ],
     providers: [
         StatusBar,

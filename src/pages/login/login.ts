@@ -1,6 +1,21 @@
-import { Component } from '@angular/core';
-import {IonicPage, Loading, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {
+    AlertController,
+    IonicPage,
+    Loading,
+    LoadingController,
+    Modal,
+    ModalController,
+    ModalOptions,
+    NavController,
+    NavParams, ViewController
+} from 'ionic-angular';
+import {Misc} from "../../utils/Misc";
+import {Stats} from "../../utils/Stats";
 import * as $ from 'jquery';
+import {YA_API} from "../../utils/YA_API";
+import {RegisterPage} from "../register/register";
+import {Storage} from "@ionic/storage";
 
 /**
  * Generated class for the LoginPage page.
@@ -11,8 +26,8 @@ import * as $ from 'jquery';
 
 @IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
+    selector: 'page-login',
+    templateUrl: 'login.html',
 })
 export class LoginPage {
 
@@ -20,24 +35,80 @@ export class LoginPage {
     public id_number: number;
     public idString: string;
     public password: string;
-    loading: Loading;
+    private loading: Loading;
+    private registerModal: Modal;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-      this.logoPic = "../../assets/imgs/logo.png";
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams,
+                private alertCtrl: AlertController, private loadingCtrl: LoadingController,
+                private modalCtrl: ModalController, private storage: Storage,
+                private view: ViewController) {
+        this.logoPic = "../../assets/imgs/logo.png";
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad LoginPage');
+    }
 
-  login(){
-      this.idString = this.id_number + "";
-      if (this.idString.length == 0 || this.password.length == 0) {
-          console.log('fill in all blanks');
-      }else{
-        //TODO make an API call to login
-      }
-  }
+    async login() {
+        this.idString = String(this.id_number);
+        console.log(Stats.FILL_BLANKS);
+        if (this.idString == undefined || this.password == undefined) {
+            Misc.presentAlert(this.alertCtrl, Stats.FILL_BLANKS);
+        } else {
+            if (this.idString.length == 0 || this.password.length == 0) {
+                Misc.presentAlert(this.alertCtrl, Stats.FILL_BLANKS);
+            } else {
+                console.log('making API call');
+                this.loading = this.loadingCtrl.create({
+                    content: 'Signing in...'
+                });
+
+                this.loading.present();
+                $.ajax({
+                    method: 'POST',
+                    url: YA_API.LOGIN,
+                    timeout: 5000,
+                    data: {
+                        id_number: this.idString,
+                        password: this.password
+                    }
+                }).done(data => {
+                    console.log(data);
+                    if (data.success) {
+                        this.storage.set(Stats.AUTHENTICATED, true);
+                        this.storage.set(Stats.USER_PROFILE, JSON.stringify(data.user));
+                        this.view.dismiss(data.user);
+                    } else {
+                        Misc.presentAlert(this.alertCtrl, data.message);
+                    }
+                }).fail(error => {
+                    console.log(error);
+                    Misc.presentAlert(this.alertCtrl, Stats.FAILED_NETWORK);
+                }).always(() => {
+                    this.loading.dismiss();
+                });
+            }
+
+        }
+    }
+
+    async forgotPassword() {
+        console.log('will open forgot password');
+    }
+
+    async createAccount() {
+        const modalOptions: ModalOptions = {
+            enableBackdropDismiss: false
+        };
+        this.registerModal = this.modalCtrl.create(RegisterPage, null, modalOptions);
+        this.registerModal.present();
+        this.registerModal.onDidDismiss(data => {
+            console.log(data);
+            if (data != undefined) {
+                this.view.dismiss(data.user);
+            }
+        });
+    }
 
 
 }

@@ -1,3 +1,46 @@
 page-register {
+  ion-content{
+    background: url(../../assets/imgs/login_bg.jpg) no-repeat center fixed;
+    background-size: cover;
+  }
+  h3{
+    color: #ffffff;
+    width: 100%;
+    text-align: center;
+  }
+  .blur-landing {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(3, 33, 57, 0.90);
+    /*background-color: rgba(100, 3, 17, 0.7);
+    background-color: rgba(213, 175, 195, 0.95);*/
+    padding-top: 0px;
+    z-index: 0;
+  }
+  .presentation {
+    position: relative;
+    padding: 30px 30px;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 1;
+  }
+  img{
+    height: 105px;
+    margin: 0 auto;
+    display: block;
+    padding-bottom: 7px;
+  }
+  ion-card{
+    margin-bottom: 10px;
+    background: #000;
+  }
 
+  .bottom p {
+    text-align: center;
+    color: #ffffff;
+  }
+  .bottom p > strong{
+    color: #faf80e;
+  }
 }

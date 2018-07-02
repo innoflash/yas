@@ -1,3 +1,70 @@
 page-home {
 
+  ion-content {
+    background: #aaaaaa;
+  }
+  #logo {
+    display: block;
+    width: 140px;
+    border: 5px solid #dfdfdf;
+    margin: 0 auto;
+ /*   margin-top: -70px;
+    position: relative;*/
+    border-radius: 120px;
+  }
+
+  .blur-landing {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    /* background-color: rgba(3, 33, 57, 0.90);
+    *background-color: rgba(100, 3, 17, 0.7);
+     background-color: rgba(213, 175, 195, 0.95);*/
+    background: url(../../assets/shuffle/3.jpg) no-repeat center fixed;
+    background-size: 100% auto;
+    background-position: top;
+    padding-top: 0px;
+    z-index: 0;
+  }
+
+  .presentation {
+    position: fixed;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 1;
+  }
+  .presentation h1 {
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 90px;
+    margin-bottom: 60px;
+  }
+
+  .presentation h4{
+    color: #d8d8d8;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+  }
+
+  #category{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 55px;
+  }
+
+  .btnBottom{
+    width: auto;
+    margin: 30px;
+    margin-top: 50px;
+  }
+
+/*  #stories {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    margin: 0 auto;
+  }*/
 }

@@ -1,14 +1,33 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+<ion-header color="secondary">
+    <ion-navbar>
+        <ion-title>
+            YOUTH AMP
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="openMenu()">
+                <ion-icon name="options"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+    <div class="blur-landing"></div>
+    <div class="presentation">
+        <h1>
+            Innocent Mazando
+        </h1>
+        <button ion-button color="light" round outline id="category">
+            YOUTH AMP STUDENT
+        </button>
+        <img src="../../assets/imgs/logo.png" id="logo"/>
+
+        <div class="btnBottom">
+            <button ion-button color="default" block outline large id="stories" (click)="openStories()">
+                MY STORIES
+            </button>
+        </div>
+
+    </div>
+
 </ion-content>
