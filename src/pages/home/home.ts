@@ -7,18 +7,22 @@ import {
     ModalOptions,
     NavController
 } from 'ionic-angular';
+import * as $ from 'jquery';
 import {Storage} from "@ionic/storage";
 import {Stats} from "../../utils/Stats";
 import {LoginPage} from "../login/login";
 import {StoriesPage} from "../stories/stories";
 import {ProfilePage} from "../profile/profile";
+import {User} from "../../utils/User";
+import {Misc} from "../../utils/Misc";
 
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
 })
 export class HomePage {
-    loginModal: Modal;
+    private loginModal: Modal;
+    private user: User;
 
     constructor(public navCtrl: NavController, private storage: Storage,
                 private modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController,
@@ -40,7 +44,12 @@ export class HomePage {
                     this.ionViewDidLoad();
                 });
             } else {
-                //todo initialise the user`s daily page
+                this.storage.get(Stats.USER_PROFILE).then(result => {
+                    this.user = User.getUser(result);
+                    console.log(this.user);
+                    $('#username').text(this.user.fullname);
+                    $('.blur-landing').addClass('class' + Misc.getRandomInt(1, 3));
+                }).catch(error => console.log(error));
             }
         }).catch(error => console.log(error));
     }
@@ -106,6 +115,8 @@ export class HomePage {
     }
 
     async openStories() {
-        this.navCtrl.push(StoriesPage);
+        this.navCtrl.push(StoriesPage, {
+            user: this.user
+        });
     }
 }

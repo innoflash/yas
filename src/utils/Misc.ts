@@ -44,4 +44,10 @@ export class Misc {
         console.log(fieldBlank);
         return fieldBlank;
     }
+
+    static getRandomInt(min, max): number {
+        var num:number = Math.floor(Math.random() * (max - min + 1)) + min;
+        console.log(num);
+        return num;
+    }
 }

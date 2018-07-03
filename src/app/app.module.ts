@@ -14,6 +14,7 @@ import {EditProfilePage} from "../pages/edit-profile/edit-profile";
 import {StoriesPage} from "../pages/stories/stories";
 import {NewStoryPage} from "../pages/new-story/new-story";
 import {EditStoryPage} from "../pages/edit-story/edit-story";
+import {StoryPage} from "../pages/story/story";
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import {EditStoryPage} from "../pages/edit-story/edit-story";
         EditProfilePage,
         StoriesPage,
         NewStoryPage,
-        EditStoryPage
+        EditStoryPage,
+        StoryPage
     ],
     imports: [
         BrowserModule,
@@ -42,7 +44,8 @@ import {EditStoryPage} from "../pages/edit-story/edit-story";
         EditProfilePage,
         StoriesPage,
         NewStoryPage,
-        EditStoryPage
+        EditStoryPage,
+        StoryPage
     ],
     providers: [
         StatusBar,

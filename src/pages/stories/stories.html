@@ -2,11 +2,51 @@
 
   <ion-navbar>
     <ion-title>Stories</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addStory()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="list-avatar-page">
+  <ion-list *ngIf="showStories">
+
+    <ion-item *ngFor="let story of stories" (click)="openStory(story)">
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/logo.png">
+      </ion-avatar>
+      <h2>
+        {{ story.title }}
+      </h2>
+      <p>
+        {{ story.category }}
+      </p>
+      <ion-note item-end>
+        {{ story.time }}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-card (click)="addStory()" *ngIf="!showStories && !networkError">
+    <ion-card-header>
+      YOUTH AMP
+    </ion-card-header>
+    <ion-card-content>
+      You havent posted any stories as yet, post one now
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="ionViewDidLoad()" *ngIf="networkError">
+    <ion-card-header>
+      YOUTH AMP
+    </ion-card-header>
+    <ion-card-content>
+      Failed to connect to the internet, please try again !!!
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
