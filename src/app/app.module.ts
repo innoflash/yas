@@ -3,7 +3,6 @@ import {ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
-
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
 import {LoginPage} from "../pages/login/login";
@@ -15,6 +14,7 @@ import {StoriesPage} from "../pages/stories/stories";
 import {NewStoryPage} from "../pages/new-story/new-story";
 import {EditStoryPage} from "../pages/edit-story/edit-story";
 import {StoryPage} from "../pages/story/story";
+import {SelectSearchableModule} from "ionic-select-searchable";
 
 @NgModule({
     declarations: [
@@ -32,7 +32,8 @@ import {StoryPage} from "../pages/story/story";
     imports: [
         BrowserModule,
         IonicModule.forRoot(MyApp),
-        IonicStorageModule.forRoot()
+        IonicStorageModule.forRoot(),
+        SelectSearchableModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -50,7 +51,10 @@ import {StoryPage} from "../pages/story/story";
     providers: [
         StatusBar,
         SplashScreen,
-        {provide: ErrorHandler, useClass: IonicErrorHandler}
+        {
+            provide: ErrorHandler,
+            useClass: IonicErrorHandler
+        }
     ]
 })
 export class AppModule {

@@ -6,29 +6,50 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Create Story</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Create Story</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
 
-    <ion-item>
-      <ion-label stacked>Username</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+    <ion-card>
+        <ion-card-header>
+            Story Details
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
 
-    <ion-item>
-      <ion-label stacked>Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
+                <ion-item>
+                    <ion-label stacked>Title</ion-label>
+                    <ion-input type="text" placeholder="Story title" [(ngModel)]="title"></ion-input>
+                </ion-item>
 
-  </ion-list>
+                <ion-item>
+                    <ion-label stacked>Category</ion-label>
+                    <select-searchable item-content
+                                       [(ngModel)]="category"
+                                       [items]="categories"
+                                       itemValueField="name"
+                                       itemTextField="name"
+                                       [noItemsFoundText]="'No category found.'"
+                                       [searchPlaceholder]="'select story category'"
+                                       aria-placeholder="'select story category'"
+                                       [canSearch]="true">
+                    </select-searchable>
+                </ion-item>
 
-  <div padding>
-    <button ion-button color="primary" block>Sign In</button>
-  </div>
+                <ion-item>
+                    <ion-label stacked>Story</ion-label>
+                    <ion-textarea [(ngModel)]="body" placeholder="Enter your story in here ..."
+                                  rows="6"></ion-textarea>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <div padding>
+        <button ion-button color="primary" block (click)="createStory()">CREATE STORY</button>
+    </div>
 </ion-content>

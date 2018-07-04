@@ -1,4 +1,4 @@
-import {AlertController} from "ionic-angular";
+import {AlertController, ToastController} from "ionic-angular";
 
 export class Misc {
     static presentAlert(alertCtrl: AlertController, message: string, title: string = "Response !", button: string = "Ok"): void {
@@ -8,6 +8,16 @@ export class Misc {
             buttons: [button]
         });
         alert.present();
+    }
+
+    static presentToast(toastCtrl: ToastController, message: string): void{
+        let toast = toastCtrl.create({
+            message: message,
+            duration: 1500,
+            position: 'bottom',
+            showCloseButton: true
+        });
+        toast.present();
     }
 
     static isBlank(entries: any): boolean{

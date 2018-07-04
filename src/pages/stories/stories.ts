@@ -26,7 +26,13 @@ export class StoriesPage {
                 private loader: LoadingController, private alertCtrl: AlertController) {
     }
 
-    ionViewDidLoad() {
+/*
+    ionViewDidEnter(){
+        this.ionViewDidLoad();
+    }
+*/
+
+    ionViewDidEnter() {
         console.log('ionViewDidLoad StoriesPage');
         this.user = this.navParams.get('user');
         this.loading = this.loader.create({

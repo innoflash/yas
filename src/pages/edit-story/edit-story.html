@@ -1,18 +1,58 @@
-<!--
-  Generated template for the EditStoryPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>EditStory</ion-title>
+    <ion-title>Edit Story</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Story Details
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
 
+        <ion-item>
+          <ion-label stacked>Title</ion-label>
+          <ion-input type="text" placeholder="Story title" [(ngModel)]="story.title"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Category</ion-label>
+          <ion-input type="text" placeholder="Category" [(ngModel)]="story.category" (focus)="openCats()"></ion-input>
+        </ion-item>
+
+        <ion-item hidden>
+          <ion-label stacked>Category</ion-label>
+          <select-searchable item-content
+                             #portComponent
+                             [(ngModel)]="category"
+                             [items]="categories"
+                             itemValueField="name"
+                             itemTextField="name"
+                             [noItemsFoundText]="'No category found.'"
+                             [searchPlaceholder]="'select story category'"
+                             aria-placeholder="'select story category'"
+                             (onChange)="portChange($event)"
+                             [canSearch]="true">
+            <ng-template selectSearchableValueTemplate let-port="value">
+              {{ story.category }})
+            </ng-template>
+          </select-searchable>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Story</ion-label>
+          <ion-textarea [(ngModel)]="story.story" placeholder="Enter your story in here ..."
+                        rows="6"></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <div padding>
+    <button ion-button color="secondary" block (click)="editStory()">EDIT STORY</button>
+  </div>
 </ion-content>

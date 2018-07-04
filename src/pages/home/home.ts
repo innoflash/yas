@@ -25,7 +25,7 @@ export class HomePage {
     private user: User;
 
     constructor(public navCtrl: NavController, private storage: Storage,
-                private modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController,
+                private modalCtrl: ModalController, private actionSheetCtrl: ActionSheetController,
                 private alertCtrl: AlertController) {
 
     }
@@ -60,7 +60,7 @@ export class HomePage {
             buttons: [
                 {
                     text: 'Stories',
-                    icon: '',
+                    icon: 'paper',
                     handler: () => {
                         console.log('open stories page');
                         this.openStories();
@@ -68,6 +68,7 @@ export class HomePage {
                 },
                 {
                     text: 'Profile',
+                    icon: 'person',
                     handler: () => {
                         console.log('profile clicked');
                         this.navCtrl.push(ProfilePage);
@@ -75,6 +76,7 @@ export class HomePage {
                 },
                 {
                     text: 'Logout',
+                    icon: 'log-out',
                     role: 'destructive',
                     handler: () => {
                         let alert = this.alertCtrl.create({
@@ -104,6 +106,7 @@ export class HomePage {
                 {
                     text: 'Cancel',
                     role: 'cancel',
+                    icon: 'close',
                     handler: () => {
                         console.log('Cancel clicked');
                     }
