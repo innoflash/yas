@@ -15,6 +15,7 @@ import {NewStoryPage} from "../pages/new-story/new-story";
 import {EditStoryPage} from "../pages/edit-story/edit-story";
 import {StoryPage} from "../pages/story/story";
 import {SelectSearchableModule} from "ionic-select-searchable";
+import {EditPasswordPage} from "../pages/edit-password/edit-password";
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import {SelectSearchableModule} from "ionic-select-searchable";
         StoriesPage,
         NewStoryPage,
         EditStoryPage,
-        StoryPage
+        StoryPage,
+        EditPasswordPage
     ],
     imports: [
         BrowserModule,
@@ -46,7 +48,8 @@ import {SelectSearchableModule} from "ionic-select-searchable";
         StoriesPage,
         NewStoryPage,
         EditStoryPage,
-        StoryPage
+        StoryPage,
+        EditPasswordPage
     ],
     providers: [
         StatusBar,

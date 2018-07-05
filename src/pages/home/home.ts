@@ -30,7 +30,7 @@ export class HomePage {
 
     }
 
-    ionViewDidLoad() {
+    ionViewDidEnter() {
         this.storage.get(Stats.AUTHENTICATED).then(authed => {
             console.log(authed);
             if (authed == null || !authed) {
@@ -71,7 +71,9 @@ export class HomePage {
                     icon: 'person',
                     handler: () => {
                         console.log('profile clicked');
-                        this.navCtrl.push(ProfilePage);
+                        this.navCtrl.push(ProfilePage, {
+                            user: this.user
+                        });
                     }
                 },
                 {

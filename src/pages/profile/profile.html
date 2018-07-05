@@ -1,12 +1,84 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Profile</ion-title>
-  </ion-navbar>
-
+    <ion-navbar>
+        <ion-title>Profile</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="profileOptions()">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <div class="topPart">
+        <img src="../../assets/imgs/logo.png" id="logo"/>
+        <h1 id="username">
+            {{ user.first_name }} {{ user.last_name }}
+        </h1>
+        <button ion-button color="light" round small outline id="category">
+            {{ user.email }}
+        </button>
+    </div>
+    <ion-card>
+        <ion-card-header>
+            STUDENT PROFILE
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="person"></ion-icon>
+                    </ion-avatar>
+                    <h2>
+                        {{ user.first_name }}
+                    </h2>
+                    <p>First name</p>
+                </ion-item>
 
+                <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="person"></ion-icon>
+                    </ion-avatar>
+                    <h2>
+                        {{ user.last_name }}
+                    </h2>
+                    <p>Last name</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="contact"></ion-icon>
+                    </ion-avatar>
+                    <h2>
+                        {{ user.id_number }}
+                    </h2>
+                    <p>ID Number</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="mail"></ion-icon>
+                    </ion-avatar>
+                    <h2>
+                        {{ user.email }}
+                    </h2>
+                    <p>Email address</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="call"></ion-icon>
+                    </ion-avatar>
+                    <h2>
+                        {{ user.phoneNumber }}
+                    </h2>
+                    <p>Contact number</p>
+                </ion-item>
+
+            </ion-list>
+            <br/>
+            <button ion-button round (click)="editProfile()" id="category">Edit Profile</button>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

@@ -7,4 +7,7 @@ export class YA_API{
     static DEL_STORY = YA_API.API_ROOT + 'delstory';
     static ADD_STORY = YA_API.API_ROOT + 'addstory';
     static EDIT_STORY = YA_API.API_ROOT + 'editstory';
+    static EDIT_PROFILE = YA_API.API_ROOT + 'editprofile';
+    static EDIT_PASSWORD = YA_API.API_ROOT + 'editpassword';
+    static DEL_PROFILE = YA_API.API_ROOT + 'delprofile';
 }
