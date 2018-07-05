@@ -41,7 +41,7 @@ export class HomePage {
                 this.loginModal.present();
                 this.loginModal.onDidDismiss(data => {
                     console.log(data);
-                    this.ionViewDidLoad();
+                    this.ionViewDidEnter();
                 });
             } else {
                 this.storage.get(Stats.USER_PROFILE).then(result => {
@@ -97,7 +97,7 @@ export class HomePage {
                                     handler: () => {
                                         console.log('Buy clicked');
                                         this.storage.remove(Stats.AUTHENTICATED);
-                                        this.ionViewDidLoad();
+                                        this.ionViewDidEnter();
                                     }
                                 }
                             ]
