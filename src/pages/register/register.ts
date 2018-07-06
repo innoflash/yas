@@ -1,6 +1,13 @@
 import {Component} from '@angular/core';
 import {
-    AlertController, IonicPage, Loading, LoadingController, Modal, ModalController, ModalOptions, NavController,
+    AlertController,
+    IonicPage,
+    Loading,
+    LoadingController,
+    Modal,
+    ModalController,
+    ModalOptions,
+    NavController,
     NavParams,
     ViewController
 } from 'ionic-angular';
@@ -9,7 +16,6 @@ import {Stats} from "../../utils/Stats";
 import * as $ from 'jquery';
 import {Storage} from "@ionic/storage";
 import {YA_API} from "../../utils/YA_API";
-import {LoginPage} from "../login/login";
 import {PrivacyPolicyPage} from "../privacy-policy/privacy-policy";
 
 
@@ -64,7 +70,7 @@ export class RegisterPage {
                 if (this.password == this.conf_password) {
                     if (this.password.length < 6) {
                         Misc.presentAlert(this.alertCtrl, Stats.SHORT_PASSWORD);
-                    }else{
+                    } else {
                         console.log('it must be here');
                         this.loading = this.loadingCtrl.create({
                             content: 'Creating account...'
@@ -89,7 +95,7 @@ export class RegisterPage {
                                 this.storage.set(Stats.AUTHENTICATED, true);
                                 this.storage.set(Stats.USER_PROFILE, JSON.stringify(data.user));
                                 this.view.dismiss(data);
-                            }else{
+                            } else {
                                 Misc.presentAlert(this.alertCtrl, data.message);
                             }
                         }).fail(error => {
@@ -99,21 +105,21 @@ export class RegisterPage {
                             this.loading.dismiss();
                         });
                     }
-                }else{
+                } else {
                     Misc.presentAlert(this.alertCtrl, Stats.UNMATCHING_PASSWORDS);
                 }
-            }else{
+            } else {
                 Misc.presentAlert(this.alertCtrl, Stats.TERMS_AND_CONDITIONS);
             }
         }
     }
 
-    async closeRegister(){
+    async closeRegister() {
         //will close the modal
         this.view.dismiss();
     }
 
-    async openTC(){
+    async openTC() {
         const modalOptions: ModalOptions = {
             enableBackdropDismiss: false
         };
