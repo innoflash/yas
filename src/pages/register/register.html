@@ -68,6 +68,23 @@
 
         </ion-card>
 
+        <ion-card>
+            <ion-list>
+                <ion-item>
+                    <ion-label class="centerIt">Do you agree to our </ion-label>
+                    <ion-checkbox [(ngModel)]="agree"></ion-checkbox>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label class="centerIt smaller" color="primary" (click)="openTC()">
+                        Privacy policy & Terms of service ?
+                    </ion-label>
+
+                </ion-item>
+
+            </ion-list>
+        </ion-card>
+
         <div class="bottom" padding>
             <button ion-button large block icon-left (click)="register()">
                 <ion-icon name="person-add"></ion-icon>

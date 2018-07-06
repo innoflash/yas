@@ -1,9 +1,9 @@
 page-register {
-  ion-content{
+  ion-content {
     background: url(../../assets/imgs/login_bg.jpg) no-repeat center fixed;
     background-size: cover;
   }
-  h3{
+  h3 {
     color: #ffffff;
     width: 100%;
     text-align: center;
@@ -25,13 +25,13 @@ page-register {
     width: 100%;
     z-index: 1;
   }
-  img{
+  img {
     height: 105px;
     margin: 0 auto;
     display: block;
     padding-bottom: 7px;
   }
-  ion-card{
+  ion-card {
     margin-bottom: 10px;
     background: #000;
   }
@@ -40,7 +40,13 @@ page-register {
     text-align: center;
     color: #ffffff;
   }
-  .bottom p > strong{
+  .bottom p > strong {
     color: #faf80e;
+  }
+  .centerIt {
+    text-align: center;
+  }
+  .smaller{
+    font-size: 60%;
   }
 }
