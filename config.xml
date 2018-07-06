@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.youthamp.student" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Student</name>
+    <name>Youth Amp</name>
     <description>This is a Youth Amp app for the students to sign up and access info</description>
     <author email="innocentmazando@gmail.com" href="https://innoflash.net/">
         App Developer
