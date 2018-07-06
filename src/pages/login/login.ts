@@ -42,7 +42,7 @@ export class LoginPage {
                 private alertCtrl: AlertController, private loadingCtrl: LoadingController,
                 private modalCtrl: ModalController, private storage: Storage,
                 private view: ViewController) {
-        this.logoPic = "../../assets/imgs/logo.png";
+        this.logoPic = "assets/imgs/logo.png";
     }
 
     ionViewDidLoad() {
