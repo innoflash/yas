@@ -18,4 +18,5 @@ export class Stats {
         {name: 'Science'},
         {name: 'Computer Science'},
     ];
+    static CONFIRM_ACCOUNT: string = 'confirm_account_yas';
 }

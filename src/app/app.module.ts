@@ -17,6 +17,7 @@ import {StoryPage} from "../pages/story/story";
 import {SelectSearchableModule} from "ionic-select-searchable";
 import {EditPasswordPage} from "../pages/edit-password/edit-password";
 import {PrivacyPolicyPage} from "../pages/privacy-policy/privacy-policy";
+import {ConfAccPage} from "../pages/conf-acc/conf-acc";
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import {PrivacyPolicyPage} from "../pages/privacy-policy/privacy-policy";
         EditStoryPage,
         StoryPage,
         EditPasswordPage,
-        PrivacyPolicyPage
+        PrivacyPolicyPage,
+        ConfAccPage
     ],
     imports: [
         BrowserModule,
@@ -52,7 +54,8 @@ import {PrivacyPolicyPage} from "../pages/privacy-policy/privacy-policy";
         EditStoryPage,
         StoryPage,
         EditPasswordPage,
-        PrivacyPolicyPage
+        PrivacyPolicyPage,
+        ConfAccPage
     ],
     providers: [
         StatusBar,

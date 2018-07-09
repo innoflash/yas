@@ -8,7 +8,8 @@ import {
     ModalController,
     ModalOptions,
     NavController,
-    NavParams, ViewController
+    NavParams,
+    ViewController
 } from 'ionic-angular';
 import {Misc} from "../../utils/Misc";
 import {Stats} from "../../utils/Stats";
@@ -16,6 +17,7 @@ import * as $ from 'jquery';
 import {YA_API} from "../../utils/YA_API";
 import {RegisterPage} from "../register/register";
 import {Storage} from "@ionic/storage";
+import {ConfAccPage} from "../conf-acc/conf-acc";
 
 /**
  * Generated class for the LoginPage page.
@@ -37,12 +39,17 @@ export class LoginPage {
     public password: string;
     private loading: Loading;
     private registerModal: Modal;
+    private confModal: Modal;
+    private modalOptions: ModalOptions;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 private alertCtrl: AlertController, private loadingCtrl: LoadingController,
                 private modalCtrl: ModalController, private storage: Storage,
                 private view: ViewController) {
         this.logoPic = "assets/imgs/logo.png";
+        this.modalOptions = {
+            enableBackdropDismiss: false
+        };
     }
 
     ionViewDidLoad() {
@@ -97,15 +104,21 @@ export class LoginPage {
     }
 
     async createAccount() {
-        const modalOptions: ModalOptions = {
-            enableBackdropDismiss: false
-        };
-        this.registerModal = this.modalCtrl.create(RegisterPage, null, modalOptions);
+        this.registerModal = this.modalCtrl.create(RegisterPage, null, this.modalOptions);
         this.registerModal.present();
         this.registerModal.onDidDismiss(data => {
             console.log(data);
             if (data != undefined) {
-                this.view.dismiss(data.user);
+                if (data.openConfirmation) {
+                    this.confModal = this.modalCtrl.create(ConfAccPage, {
+                        user: data.user
+                    }, this.modalOptions);
+                    this.confModal.present();
+                    this.confModal.onDidDismiss(data => {
+                        console.log(data);
+                    });
+                }
+                // this.view.dismiss(data.user);
             }
         });
     }

@@ -36,6 +36,7 @@ export class RegisterPage {
     public agree: boolean = false;
     public id_number: number;
     public idString: string;
+    public category: string;
     private isBlank: boolean;
     private loading: Loading;
     private tcModal: Modal;
@@ -44,6 +45,7 @@ export class RegisterPage {
                 private alertCtrl: AlertController, private loadingCtrl: LoadingController,
                 private storage: Storage, private view: ViewController,
                 private modalCtrl: ModalController) {
+        this.category = 'Student';
     }
 
     ionViewDidLoad() {
@@ -60,8 +62,11 @@ export class RegisterPage {
             this.email,
             this.contact,
             this.idString,
-            this.password
+            this.password,
+            this.category
         ]);
+
+
 
         if (this.isBlank) {
             Misc.presentAlert(this.alertCtrl, Stats.FILL_BLANKS)
@@ -87,13 +92,15 @@ export class RegisterPage {
                                 email: this.email,
                                 phone: this.contact,
                                 password: this.password,
-                                id_number: this.idString
+                                id_number: this.idString,
+                                category: this.category
                             }
                         }).done(data => {
                             console.log(data);
                             if (data.success) {
-                                this.storage.set(Stats.AUTHENTICATED, true);
+                                this.storage.set(Stats.CONFIRM_ACCOUNT, true);
                                 this.storage.set(Stats.USER_PROFILE, JSON.stringify(data.user));
+                                data.openConfirmation = true;
                                 this.view.dismiss(data);
                             } else {
                                 Misc.presentAlert(this.alertCtrl, data.message);

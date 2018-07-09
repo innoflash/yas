@@ -15,6 +15,7 @@ import {StoriesPage} from "../stories/stories";
 import {ProfilePage} from "../profile/profile";
 import {User} from "../../utils/User";
 import {Misc} from "../../utils/Misc";
+import {ConfAccPage} from "../conf-acc/conf-acc";
 
 @Component({
     selector: 'page-home',
@@ -23,10 +24,15 @@ import {Misc} from "../../utils/Misc";
 export class HomePage {
     private loginModal: Modal;
     private user: User;
+    private confModal: Modal;
+    private modalOptions: ModalOptions;
 
     constructor(public navCtrl: NavController, private storage: Storage,
                 private modalCtrl: ModalController, private actionSheetCtrl: ActionSheetController,
                 private alertCtrl: AlertController) {
+        this.modalOptions = {
+            enableBackdropDismiss: false
+        };
 
     }
 
@@ -34,15 +40,29 @@ export class HomePage {
         this.storage.get(Stats.AUTHENTICATED).then(authed => {
             console.log(authed);
             if (authed == null || !authed) {
-                const modalOptions: ModalOptions = {
-                    enableBackdropDismiss: false
-                };
-                this.loginModal = this.modalCtrl.create(LoginPage, null, modalOptions);
-                this.loginModal.present();
-                this.loginModal.onDidDismiss(data => {
-                    console.log(data);
-                    this.ionViewDidEnter();
+                this.storage.get(Stats.CONFIRM_ACCOUNT).then(confirmAcc => {
+                    console.log(confirmAcc);
+                    if (confirmAcc == null || !confirmAcc) {
+                        this.loginModal = this.modalCtrl.create(LoginPage, null, this.modalOptions);
+                        this.loginModal.present();
+                        this.loginModal.onDidDismiss(data => {
+                            console.log(data);
+                            this.ionViewDidEnter();
+                        });
+                    } else {
+                        this.storage.get(Stats.USER_PROFILE).then(result => {
+                            this.user = User.getUser(result);
+                            this.confModal = this.modalCtrl.create(ConfAccPage, {
+                                user: this.user
+                            }, this.modalOptions);
+                            this.confModal.present();
+                            this.confModal.onDidDismiss(data => {
+
+                            });
+                        });
+                    }
                 });
+
             } else {
                 this.storage.get(Stats.USER_PROFILE).then(result => {
                     this.user = User.getUser(result);

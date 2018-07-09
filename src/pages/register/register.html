@@ -47,7 +47,19 @@
                     <ion-label stacked>Contact Number *</ion-label>
                     <ion-input type="number" placeholder="Cell number" [(ngModel)]="contact_number"></ion-input>
                 </ion-item>
+                <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="person"></ion-icon>
+                    </ion-avatar>
+                    <ion-label stacked="">Category</ion-label>
+                    <ion-select [(ngModel)]="category" interface="popover">
+                        <ion-option value="Student" selected>Student</ion-option>
+                        <ion-option value="Ordinary">Ordinary user</ion-option>
+                        <ion-option value="Funder">Funder</ion-option>
 
+                    </ion-select>
+                </ion-item>
+                <hr/>
 
                 <ion-item>
                     <ion-avatar item-start>
@@ -71,7 +83,7 @@
         <ion-card>
             <ion-list>
                 <ion-item>
-                    <ion-label class="centerIt">Do you agree to our </ion-label>
+                    <ion-label class="centerIt">Do you agree to our</ion-label>
                     <ion-checkbox [(ngModel)]="agree"></ion-checkbox>
                 </ion-item>
 
@@ -86,7 +98,7 @@
         </ion-card>
 
         <div class="bottom" padding>
-            <button ion-button large block icon-left (click)="register()">
+            <button ion-button large block outline color="dark" icon-left (click)="register()">
                 <ion-icon name="person-add"></ion-icon>
                 Create Account
             </button>

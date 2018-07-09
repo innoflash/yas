@@ -1,5 +1,8 @@
 page-login {
   ion-content{
+    border: 1px solid #FFD700;
+  }
+  ion-content{
     background: url(../assets/imgs/login_bg.jpg) no-repeat center fixed;
     background-size: cover;
   }
@@ -7,9 +10,8 @@ page-login {
     position: fixed;
     height: 100%;
     width: 100%;
-    background-color: rgba(3, 33, 57, 0.90);
-    /*background-color: rgba(100, 3, 17, 0.7);
-    background-color: rgba(213, 175, 195, 0.95);*/
+  //  background-color: rgba(3, 33, 57, 0.90);
+    background: #e3e3e3;
     padding-top: 0px;
     z-index: 0;
   }
@@ -33,9 +35,9 @@ page-login {
 
   .bottom p {
     text-align: center;
-    color: #ffffff;
+    color: #ffd700;
   }
   .bottom p > strong{
-    color: #ffa500;
+    color: #0f0f0f;
   }
 }

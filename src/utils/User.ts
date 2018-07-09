@@ -7,6 +7,8 @@ export class User {
     id_number: string;
     password: string;
     fullname: string;
+    category: string;
+    picture: string;
 
     static getUser(data: string): User {
         var user: User = new User();
@@ -18,6 +20,8 @@ export class User {
         user.id_number = thedata.id_number;
         user.fullname = thedata.first_name + " " + thedata.last_name;
         user.id = thedata.id;
+        user.category = thedata.category;
+        user.picture = thedata.picture;
 
         return user;
     }
