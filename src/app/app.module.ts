@@ -18,6 +18,10 @@ import {SelectSearchableModule} from "ionic-select-searchable";
 import {EditPasswordPage} from "../pages/edit-password/edit-password";
 import {PrivacyPolicyPage} from "../pages/privacy-policy/privacy-policy";
 import {ConfAccPage} from "../pages/conf-acc/conf-acc";
+import {YsTabsPage} from "../pages/ys-tabs/ys-tabs";
+import {StayTunePage} from "../pages/stay-tune/stay-tune";
+import {NotificationsPage} from "../pages/notifications/notifications";
+import {AllStoriesPage} from "../pages/all-stories/all-stories";
 
 @NgModule({
     declarations: [
@@ -33,7 +37,11 @@ import {ConfAccPage} from "../pages/conf-acc/conf-acc";
         StoryPage,
         EditPasswordPage,
         PrivacyPolicyPage,
-        ConfAccPage
+        ConfAccPage,
+        YsTabsPage,
+        AllStoriesPage,
+        NotificationsPage,
+        StayTunePage
     ],
     imports: [
         BrowserModule,
@@ -55,7 +63,11 @@ import {ConfAccPage} from "../pages/conf-acc/conf-acc";
         StoryPage,
         EditPasswordPage,
         PrivacyPolicyPage,
-        ConfAccPage
+        ConfAccPage,
+        YsTabsPage,
+        AllStoriesPage,
+        NotificationsPage,
+        StayTunePage
     ],
     providers: [
         StatusBar,

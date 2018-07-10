@@ -16,12 +16,14 @@ import {ProfilePage} from "../profile/profile";
 import {User} from "../../utils/User";
 import {Misc} from "../../utils/Misc";
 import {ConfAccPage} from "../conf-acc/conf-acc";
+import {YsTabsPage} from "../ys-tabs/ys-tabs";
 
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
 })
 export class HomePage {
+    rootPage = YsTabsPage;
     private loginModal: Modal;
     private user: User;
     private confModal: Modal;
@@ -33,7 +35,8 @@ export class HomePage {
         this.modalOptions = {
             enableBackdropDismiss: false
         };
-
+/*        this.storage.remove(Stats.CONFIRM_ACCOUNT);
+        this.storage.remove(Stats.AUTHENTICATED);*/
     }
 
     ionViewDidEnter() {
@@ -57,7 +60,9 @@ export class HomePage {
                             }, this.modalOptions);
                             this.confModal.present();
                             this.confModal.onDidDismiss(data => {
-
+                                if (data != null && data.restartApp) {
+                                    this.ionViewDidEnter();
+                                }
                             });
                         });
                     }
@@ -69,6 +74,7 @@ export class HomePage {
                     console.log(this.user);
                     $('#username').text(this.user.fullname);
                     $('.blur-landing').addClass('class' + Misc.getRandomInt(1, 3));
+                    this.navCtrl.setRoot(YsTabsPage);
                 }).catch(error => console.log(error));
             }
         }).catch(error => console.log(error));

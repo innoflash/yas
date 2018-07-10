@@ -12,4 +12,5 @@ export class YA_API{
     static DEL_PROFILE = YA_API.API_ROOT + 'delprofile';
     static CONFIRM_ACCOUNT = YA_API.API_ROOT + 'confacc';
     static DEL_ACCOUNT = YA_API.API_ROOT + 'delacc';
+    static REQUEST_CODE = YA_API.API_ROOT + 'requestcode';
 }

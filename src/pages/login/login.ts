@@ -116,6 +116,9 @@ export class LoginPage {
                     this.confModal.present();
                     this.confModal.onDidDismiss(data => {
                         console.log(data);
+                        if (data != undefined && data.restartApp) {
+                            this.view.dismiss();
+                        }
                     });
                 }
                 // this.view.dismiss(data.user);

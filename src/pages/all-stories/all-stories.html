@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Stories</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="storiesOptions()">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-card (click)="addStory()" *ngIf="!showStories && !networkError">
+    <ion-card-header>
+      YOUTH AMP
+    </ion-card-header>
+    <ion-card-content>
+      You havent posted any stories as yet, post one now
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="ionViewDidLoad()" *ngIf="networkError">
+    <ion-card-header>
+      YOUTH AMP
+    </ion-card-header>
+    <ion-card-content>
+      Failed to connect to the internet, please try again !!!
+    </ion-card-content>
+  </ion-card>
+</ion-content>
