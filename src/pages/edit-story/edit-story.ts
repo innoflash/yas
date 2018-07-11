@@ -36,6 +36,8 @@ export class EditStoryPage {
     public title: string;
     public body: string;
     public category: string;
+    public raw_amount: number;
+    private hasBlanks: boolean;
     private loading: Loading;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -61,32 +63,45 @@ export class EditStoryPage {
     }
 
     async editStory() {
-        this.loading = this.loader.create({
-            content: 'Creating story...'
-        });
-        this.loading.present();
-        $.ajax({
-            method: 'POST',
-            url: YA_API.EDIT_STORY,
-            timeout: 5000,
-            data: {
-                title: this.story.title,
-                category: this.story.category,
-                story: this.story.story,
-                story_id: this.story.id,
-                id: this.user.id,
-                id_number: this.user.id_number
-            }
-        }).done(response => {
-            Misc.presentAlert(this.alertCtrl, response.message);
-            if (response.success) {
-                this.view.dismiss();
-            }
-        }).fail(error => {
-            console.log(error);
-            Misc.presentAlert(this.alertCtrl, Stats.FAILED_NETWORK);
-        }).always(() => {
-            this.loading.dismiss();
-        });
+        console.log(this.story);
+        this.hasBlanks = Misc.hasBlank([
+            this.story.title,
+            this.story.story,
+            this.story.category,
+            String(this.raw_amount)
+        ]);
+
+        if (this.hasBlanks) {
+            Misc.presentAlert(this.alertCtrl, Stats.FILL_BLANKS);
+        } else {
+            this.loading = this.loader.create({
+                content: 'Editing story...'
+            });
+            this.loading.present();
+            $.ajax({
+                method: 'POST',
+                url: YA_API.EDIT_STORY,
+                timeout: 5000,
+                data: {
+                    title: this.story.title,
+                    category: this.story.category,
+                    story: this.story.story,
+                    story_id: this.story.id,
+                    id: this.user.id,
+                    id_number: this.user.id_number,
+                    amount: this.story.raw_amount
+                }
+            }).done(response => {
+                Misc.presentAlert(this.alertCtrl, response.message);
+                if (response.success) {
+                    this.view.dismiss();
+                }
+            }).fail(error => {
+                console.log(error);
+                Misc.presentAlert(this.alertCtrl, Stats.FAILED_NETWORK);
+            }).always(() => {
+                this.loading.dismiss();
+            });
+        }
     }
 }

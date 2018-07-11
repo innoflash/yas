@@ -23,11 +23,17 @@
             <ion-list>
 
                 <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="paper"></ion-icon>
+                    </ion-avatar>
                     <ion-label stacked>Title</ion-label>
                     <ion-input type="text" placeholder="Story title" [(ngModel)]="title"></ion-input>
                 </ion-item>
 
                 <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="paper"></ion-icon>
+                    </ion-avatar>
                     <ion-label stacked>Category</ion-label>
                     <select-searchable item-content
                                        [(ngModel)]="category"
@@ -42,9 +48,20 @@
                 </ion-item>
 
                 <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="paper"></ion-icon>
+                    </ion-avatar>
                     <ion-label stacked>Story</ion-label>
                     <ion-textarea [(ngModel)]="body" placeholder="Enter your story in here ..."
                                   rows="6"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="cash"></ion-icon>
+                    </ion-avatar>
+                    <ion-label stacked>Pledge Amount (R)</ion-label>
+                    <ion-input type="number" placeholder="amount you are looking for (Rands)" [(ngModel)]="amount"></ion-input>
                 </ion-item>
             </ion-list>
         </ion-card-content>

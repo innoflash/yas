@@ -1,6 +1,12 @@
 import {Component} from '@angular/core';
 import {
-    AlertController, IonicPage, Loading, LoadingController, NavController, NavParams, ToastController,
+    AlertController,
+    IonicPage,
+    Loading,
+    LoadingController,
+    NavController,
+    NavParams,
+    ToastController,
     ViewController
 } from 'ionic-angular';
 import {User} from "../../utils/User";
@@ -20,6 +26,7 @@ export class NewStoryPage {
     public title: string;
     public body: string;
     public category: string;
+    public amount: number;
     private user: User;
     private story: any;
     private loading: Loading;
@@ -36,16 +43,17 @@ export class NewStoryPage {
         this.user = this.navParams.get('user');
     }
 
-    async createStory(){
+    async createStory() {
         this.hasBlanks = Misc.hasBlank([
             this.title,
             this.body,
-            this.category
+            this.category,
+            String(this.amount)
         ]);
 
         if (this.hasBlanks) {
             Misc.presentAlert(this.alertCtrl, Stats.FILL_BLANKS);
-        }else{
+        } else {
             this.loading = this.loader.create({
                 content: 'Creating story...'
             });
@@ -59,7 +67,8 @@ export class NewStoryPage {
                     id_number: this.user.id_number,
                     title: this.title,
                     category: this.category['name'],
-                    story: this.body
+                    story: this.body,
+                    amount: this.amount
                 }
             }).done(response => {
                 console.log(response);

@@ -1,11 +1,13 @@
 import {Component} from '@angular/core';
 import {Storage} from "@ionic/storage";
+import * as jquery from 'jquery';
 import {ActionSheetController, AlertController, IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
 import {StoriesPage} from "../stories/stories";
 import {NewStoryPage} from "../new-story/new-story";
 import {Stats} from "../../utils/Stats";
 import {ProfilePage} from "../profile/profile";
 import {User} from "../../utils/User";
+import {YA_API} from "../../utils/YA_API";
 
 
 @IonicPage()
@@ -16,14 +18,32 @@ import {User} from "../../utils/User";
 export class AllStoriesPage {
 
     private user: User;
+    public showStories: boolean = false;
+    public networkError: boolean = false;
+    public statusMessage: string;
+    private storiesURL: string;
+    private stories: any[];
+    private currentPage: number = 0;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 private actionSheetCtrl: ActionSheetController, public platform: Platform,
                 private alertCtrl: AlertController, private storage: Storage) {
+        this.statusMessage = "Loading...";
+
+        /*     this.storage.get(Stats.USER_PROFILE).then(user => {
+                 this.user = User.getUser(user);
+             }).catch(error => console.log(error));*/
     }
 
     ionViewDidLoad() {
+        this.storage.get(Stats.USER_PROFILE).then(user => {
+            this.user = User.getUser(user);
+            this.stories = [];
+            this.storiesURL = YA_API.ALL_STORIES;
+            this.refreshStories(this.user);
+        }).catch(error => console.log(error));
         console.log('ionViewDidLoad AllStoriesPage');
+
     }
 
     async storiesOptions() {
@@ -35,21 +55,25 @@ export class AllStoriesPage {
                     text: 'Refresh',
                     icon: !this.platform.is('ios') ? 'refresh' : null,
                     handler: () => {
-                        this.refreshStories();
+                        this.triggerRefresh();
                     }
                 },
                 {
                     text: 'My Stories',
                     icon: !this.platform.is('ios') ? 'paper' : null,
                     handler: () => {
-                        this.navCtrl.push(StoriesPage);
+                        this.navCtrl.push(StoriesPage, {
+                            user: this.user
+                        });
                     }
                 },
                 {
                     text: 'New Story',
                     icon: !this.platform.is('ios') ? 'add' : null,
                     handler: () => {
-                        this.navCtrl.push(NewStoryPage);
+                        this.navCtrl.push(NewStoryPage, {
+                            user: this.user
+                        });
                     }
                 },
                 {
@@ -72,11 +96,46 @@ export class AllStoriesPage {
         actionSheet.present();
     }
 
-    async refreshStories(){
-
+    async triggerRefresh() {
+        this.storiesURL = YA_API.ALL_STORIES;
+        this.stories = [];
+        this.refreshStories(this.user);
     }
 
-    async openUserMenu(){
+    async refreshStories(user: User) {
+        jquery.ajax({
+            method: 'POST',
+            url: this.storiesURL,
+            timeout: 5000,
+            data: {
+                id: this.user.id,
+                id_number: this.user.id_number
+            }
+        }).done(response => {
+            console.log(response);
+            this.networkError = false;
+            this.currentPage = response.current_page;
+            response.data.forEach(function (story) {
+                console.log(story);
+                this.stories.push(story);
+            });
+            console.log(this.stories);
+            /*if (this.stories.length == 0) {
+                this.showStories = false;
+                this.statusMessage = "No stories found !!!"
+            } else {
+                this.showStories = true;
+            }*/
+        }).fail(error => {
+            console.log(error);
+            this.statusMessage = Stats.FAILED_NETWORK;
+            this.networkError = true;
+        }).always(() => {
+
+        });
+    }
+
+    async openUserMenu() {
         let actionSheet = this.actionSheetCtrl.create({
             title: 'MY MENU',
             buttons: [
@@ -85,7 +144,9 @@ export class AllStoriesPage {
                     icon: 'paper',
                     handler: () => {
                         console.log('open stories page');
-                        this.navCtrl.push(StoriesPage);
+                        this.navCtrl.push(StoriesPage, {
+                            user: this.user
+                        });
                     }
                 },
                 {
@@ -137,7 +198,6 @@ export class AllStoriesPage {
                 }
             ]
         });
-
         actionSheet.present();
     }
 

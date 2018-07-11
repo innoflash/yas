@@ -16,16 +16,25 @@
       <ion-list>
 
         <ion-item>
+          <ion-avatar item-start>
+            <ion-icon name="paper"></ion-icon>
+          </ion-avatar>
           <ion-label stacked>Title</ion-label>
           <ion-input type="text" placeholder="Story title" [(ngModel)]="story.title"></ion-input>
         </ion-item>
 
         <ion-item>
+          <ion-avatar item-start>
+            <ion-icon name="paper"></ion-icon>
+          </ion-avatar>
           <ion-label stacked>Category</ion-label>
           <ion-input type="text" placeholder="Category" [(ngModel)]="story.category" (focus)="openCats()"></ion-input>
         </ion-item>
 
         <ion-item hidden>
+          <ion-avatar item-start>
+            <ion-icon name="paper"></ion-icon>
+          </ion-avatar>
           <ion-label stacked>Category</ion-label>
           <select-searchable item-content
                              #portComponent
@@ -45,9 +54,20 @@
         </ion-item>
 
         <ion-item>
+          <ion-avatar item-start>
+            <ion-icon name="paper"></ion-icon>
+          </ion-avatar>
           <ion-label stacked>Story</ion-label>
           <ion-textarea [(ngModel)]="story.story" placeholder="Enter your story in here ..."
                         rows="6"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar item-start>
+            <ion-icon name="cash"></ion-icon>
+          </ion-avatar>
+          <ion-label stacked>Pledge Amount (R)</ion-label>
+          <ion-input type="number" placeholder="amount you are looking for (Rands)" [(ngModel)]="story.raw_amount"></ion-input>
         </ion-item>
       </ion-list>
     </ion-card-content>

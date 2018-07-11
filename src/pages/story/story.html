@@ -31,6 +31,15 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-card *ngIf="story.amount">
+    <ion-card-header>
+      Pledge Amount
+    </ion-card-header>
+    <ion-card-content>
+      R {{ story.amount }}
+    </ion-card-content>
+  </ion-card>
+
   <ion-card *ngIf="story.story">
     <ion-card-header>
       Story
