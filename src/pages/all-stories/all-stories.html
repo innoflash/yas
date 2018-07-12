@@ -24,16 +24,49 @@
     </ion-card>
 
     <ion-list *ngIf="showStories">
-        <ion-item>
+        <ion-item *ngFor="let story of stories" (click)="openStory(story)">
             <ion-avatar item-start>
                 <img src="assets/imgs/user.png">
             </ion-avatar>
-            <h2>Finn</h2>
-            <h3>I'm a big deal</h3>
-            <p>Listen, I've had a pretty messed up day...</p>
-            <ion-note item-end>3:43 pm</ion-note>
+            <h2>
+                {{ story.sender }}
+            </h2>
+            <h3>
+                <small id="capsIt">
+                    {{ story.category }}
+                </small>
+            </h3>
+            <p>
+                {{ story.title }}
+            </p>
+            <ion-note item-end>
+                <small>
+                    {{ story.time }}
+                </small>
+            </ion-note>
+            <p>
+                <button ion-button icon-start outline small color="dark">
+                    <ion-icon name="eye"></ion-icon>
+                    {{ story.views }}
+                </button>
+                <button ion-button icon-start outline small color="dark">
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    {{ story.likes }}
+                </button>
+            <!--    <button ion-button icon-start small color="gold" (click)="shareStory(story)">
+                    <ion-icon name="share"></ion-icon>
+                </button>-->
+            </p>
         </ion-item>
-
-
     </ion-list>
+
+    <button ion-button icon-start small outline round
+            color="dark"
+            id="loadMore"
+            *ngIf="showLoadMore"
+            (click)="refreshStories()">
+        <ion-icon name="refresh"></ion-icon>
+        LOAD MORE
+    </button>
+
 </ion-content>

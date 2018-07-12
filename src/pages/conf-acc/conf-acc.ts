@@ -139,14 +139,6 @@ export class ConfAccPage {
         }).done(response => {
             console.log(response);
             Misc.presentAlert(this.alertCtrl, response.message);
-            if (response.success) {
-                this.storage.set(Stats.CONFIRM_ACCOUNT, false);
-                this.storage.remove(Stats.CONFIRM_ACCOUNT);
-                this.storage.remove(Stats.USER_PROFILE);
-                this.view.dismiss({
-                    restartApp: true
-                });
-            }
         }).fail(error => {
             console.log(error);
             Misc.presentAlert(this.alertCtrl, Stats.FAILED_NETWORK);

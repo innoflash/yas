@@ -1,13 +1,20 @@
 import {Component} from '@angular/core';
 import {Storage} from "@ionic/storage";
 import * as jquery from 'jquery';
-import {ActionSheetController, AlertController, IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {
+    ActionSheetController, AlertController, IonicPage, NavController, NavParams, Platform,
+    ToastController
+} from 'ionic-angular';
 import {StoriesPage} from "../stories/stories";
 import {NewStoryPage} from "../new-story/new-story";
 import {Stats} from "../../utils/Stats";
 import {ProfilePage} from "../profile/profile";
 import {User} from "../../utils/User";
 import {YA_API} from "../../utils/YA_API";
+import {TheStoryPage} from "../the-story/the-story";
+import {SocialSharing} from "@ionic-native/social-sharing";
+import {Misc} from "../../utils/Misc";
+import {HomePage} from "../home/home";
 
 
 @IonicPage()
@@ -20,14 +27,15 @@ export class AllStoriesPage {
     private user: User;
     public showStories: boolean = false;
     public networkError: boolean = false;
+    public showLoadMore: boolean = false;
     public statusMessage: string;
     private storiesURL: string;
-    private stories: any[];
-    private currentPage: number = 0;
+    public stories: any[] = [];
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 private actionSheetCtrl: ActionSheetController, public platform: Platform,
-                private alertCtrl: AlertController, private storage: Storage) {
+                private alertCtrl: AlertController, private storage: Storage,
+                private socialSharing: SocialSharing, private toastCtrl: ToastController) {
         this.statusMessage = "Loading...";
 
         /*     this.storage.get(Stats.USER_PROFILE).then(user => {
@@ -38,9 +46,9 @@ export class AllStoriesPage {
     ionViewDidLoad() {
         this.storage.get(Stats.USER_PROFILE).then(user => {
             this.user = User.getUser(user);
-            this.stories = [];
+            //   this.stories = [];
             this.storiesURL = YA_API.ALL_STORIES;
-            this.refreshStories(this.user);
+            this.refreshStories();
         }).catch(error => console.log(error));
         console.log('ionViewDidLoad AllStoriesPage');
 
@@ -99,10 +107,10 @@ export class AllStoriesPage {
     async triggerRefresh() {
         this.storiesURL = YA_API.ALL_STORIES;
         this.stories = [];
-        this.refreshStories(this.user);
+        this.refreshStories();
     }
 
-    async refreshStories(user: User) {
+    async refreshStories() {
         jquery.ajax({
             method: 'POST',
             url: this.storiesURL,
@@ -114,25 +122,44 @@ export class AllStoriesPage {
         }).done(response => {
             console.log(response);
             this.networkError = false;
-            this.currentPage = response.current_page;
-            response.data.forEach(function (story) {
-                console.log(story);
-                this.stories.push(story);
-            });
+
+            var i;
+            for (i = 0; i < response.data.length; i++) {
+                this.stories.push(response.data[i]);
+            }
             console.log(this.stories);
-            /*if (this.stories.length == 0) {
+            if (this.stories.length == 0) {
                 this.showStories = false;
                 this.statusMessage = "No stories found !!!"
             } else {
                 this.showStories = true;
-            }*/
+                if (response.meta.pagination.current_page < response.meta.pagination.total_pages) {
+                    this.showLoadMore = true;
+                    this.storiesURL = response.meta.pagination.links.next;
+                } else {
+                    this.showLoadMore = false;
+                }
+            }
         }).fail(error => {
             console.log(error);
             this.statusMessage = Stats.FAILED_NETWORK;
             this.networkError = true;
-        }).always(() => {
-
         });
+    }
+
+    async openStory(story) {
+        this.navCtrl.push(TheStoryPage, {
+            user: this.user,
+            story_id: story.id,
+            first_name: story.s_firstname
+        });
+    }
+
+    async shareStory(story) {
+        this.socialSharing.share(null, story.sender + '`s story', null, 'https://youthamp.com/stories/' + story.id).then(result => {
+            console.log(result);
+            Misc.presentToast(this.toastCtrl, 'Story shared successfully :D');
+        }).catch(error => console.log(error));
     }
 
     async openUserMenu() {
@@ -180,6 +207,7 @@ export class AllStoriesPage {
                                     handler: () => {
                                         console.log('Buy clicked');
                                         this.storage.remove(Stats.AUTHENTICATED);
+                                        this.navCtrl.setRoot(HomePage);
                                         //this.ionViewDidEnter();
                                     }
                                 }

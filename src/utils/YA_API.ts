@@ -1,5 +1,6 @@
 export class YA_API{
-    static API_ROOT = "http://localhost:8001/api/yas-";
+  //  static API_ROOT = "http://localhost:8001/api/yas-";
+    static API_ROOT = "https://yas-api.innoflash.net/api/yas-";
     static LOGIN = YA_API.API_ROOT + "login";
     static REGISTER = YA_API.API_ROOT + "register";
     static GET_STORIES = YA_API.API_ROOT + 'stories';
@@ -14,4 +15,6 @@ export class YA_API{
     static DEL_ACCOUNT = YA_API.API_ROOT + 'delacc';
     static REQUEST_CODE = YA_API.API_ROOT + 'requestcode';
     static ALL_STORIES = YA_API.API_ROOT + 'allstories';
+    static USER_STORY = YA_API.API_ROOT + 'userstory';
+    static LIKE_STORY = YA_API.API_ROOT + 'likestory';
 }

@@ -22,6 +22,8 @@ import {YsTabsPage} from "../pages/ys-tabs/ys-tabs";
 import {StayTunePage} from "../pages/stay-tune/stay-tune";
 import {NotificationsPage} from "../pages/notifications/notifications";
 import {AllStoriesPage} from "../pages/all-stories/all-stories";
+import {TheStoryPage} from "../pages/the-story/the-story";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 @NgModule({
     declarations: [
@@ -41,7 +43,8 @@ import {AllStoriesPage} from "../pages/all-stories/all-stories";
         YsTabsPage,
         AllStoriesPage,
         NotificationsPage,
-        StayTunePage
+        StayTunePage,
+        TheStoryPage
     ],
     imports: [
         BrowserModule,
@@ -67,11 +70,13 @@ import {AllStoriesPage} from "../pages/all-stories/all-stories";
         YsTabsPage,
         AllStoriesPage,
         NotificationsPage,
-        StayTunePage
+        StayTunePage,
+        TheStoryPage
     ],
     providers: [
         StatusBar,
         SplashScreen,
+        SocialSharing,
         {
             provide: ErrorHandler,
             useClass: IonicErrorHandler

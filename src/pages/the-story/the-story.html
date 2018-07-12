@@ -1,0 +1,128 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ first_name }}'s story</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="storyOptions()">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-grid class="button-group" *ngIf="story">
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-start
+                        block
+                        color="dark"
+                        (click)="likeStory()"
+                        outline small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    Like
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button icon-start
+                        block
+                        color="gold"
+                        (click)="shareStory()"
+                        small>
+                    <ion-icon name="share"></ion-icon>
+                    Share
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button icon-start block
+                        color="danger"
+                        (click)="reportStory()"
+                        outline small>
+                    <ion-icon name="bug"></ion-icon>
+                    Report
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-card *ngIf="story">
+        <ion-card-header>
+            AUTHOR
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <ion-icon name="person" item-start></ion-icon>
+                    {{ story.user_name }}
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="paper" item-start></ion-icon>
+                    {{ story.user_category }}
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="story">
+        <ion-card-header>
+            Title
+        </ion-card-header>
+        <ion-card-content>
+            {{ story.title }}
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="story">
+        <ion-card-header>
+            Category
+        </ion-card-header>
+        <ion-card-content>
+            {{ story.category }}
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="story">
+        <ion-card-header>
+            Pledge Amount
+        </ion-card-header>
+        <ion-card-content>
+            R {{ story.amount }}
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="story">
+        <ion-list>
+            <ion-item>
+                <ion-icon name="eye" item-start></ion-icon>
+                Views: {{ story.views }}
+            </ion-item>
+            <ion-item>
+                <ion-icon name="thumbs-up" item-start></ion-icon>
+                Likes: {{ story.likes }}
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-card *ngIf="story">
+        <ion-card-header>
+            Story
+        </ion-card-header>
+        <ion-card-content>
+            {{ story.story }}
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="story">
+        <ion-card-header>
+            Posted
+        </ion-card-header>
+        <ion-card-content>
+            <p>
+                {{ story.time }}
+            </p>
+            {{ story.created_at }}
+        </ion-card-content>
+    </ion-card>
+</ion-content>

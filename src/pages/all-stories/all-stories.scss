@@ -1,6 +1,12 @@
 page-all-stories {
-  strong span{
+  strong span {
     color: #FFa500;
   }
-
+  #capsIt {
+    text-transform: uppercase;
+  }
+  #loadMore{
+    display: block;
+    margin: 0 auto;
+  }
 }

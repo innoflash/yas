@@ -40,6 +40,19 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-card *ngIf="story.amount">
+    <ion-list>
+      <ion-item>
+        <ion-icon name="eye" item-start></ion-icon>
+        Views: {{ story.views }}
+      </ion-item>
+      <ion-item>
+        <ion-icon name="thumbs-up" item-start></ion-icon>
+        Likes: {{ story.likes }}
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
   <ion-card *ngIf="story.story">
     <ion-card-header>
       Story
